@@ -93,8 +93,9 @@ app.delete("/tasks/:id", (req, res) => {
 
 // regex from stack overflow
 const pwd = "m295";
+let email
 app.post("/login", (req, res) => {
-  let email = req.body.email;
+  email = req.body.email
   if (
     (email = email
       .toLowerCase()
@@ -114,6 +115,7 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/verify", (req, res) => {
+  email = req.session.email
   if (req.session.email) {
     res.status(200).send(email);
   } else {
@@ -125,4 +127,5 @@ app.delete("/logout", (req, res) => {
   req.session.destroy();
   res.sendStatus(204);
 });
+
 app.listen(port, () => console.log(`App is listening on port ${port}`));
