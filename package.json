@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
+  },
+  "scripts": {
+    "swagger-autogen": "node swagger.js",
+    "dev": "nodemon tasklibrary.js"
+  }
+}
