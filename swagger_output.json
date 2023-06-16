@@ -1,0 +1,414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tasklibrary API",
+    "description": "Tasklibrary API Information"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Task",
+      "description": "API for Tasks in the tasklibrary"
+    },
+    {
+      "name": "Login",
+      "description": "API for Logins in the tasklibrary"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tasks": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "description": "endpoint to get all tasks",
+        "parameters": [
+          {
+            "name": "getTasks",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Task"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tasks",
+            "shema": [
+              {
+                "$ref": "#/definitions/Task"
+              }
+            ]
+          },
+          "403": {
+            "description": "Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "description": "endpoint to create a tasks",
+        "parameters": [
+          {
+            "name": "createTasks",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "created_at": {
+                  "example": "any"
+                },
+                "done_at": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "tasks",
+            "shema": [
+              {
+                "$ref": "#/definitions/Task"
+              }
+            ]
+          },
+          "403": {
+            "description": "Error"
+          },
+          "406": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "description": "endpoint to get a tasks by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "getTask",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Task"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tasks",
+            "shema": [
+              {
+                "$ref": "#/definitions/Task"
+              }
+            ]
+          },
+          "403": {
+            "description": "Error"
+          },
+          "404": {
+            "description": "Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Task"
+        ],
+        "description": "endpoint to get update a task",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateTask",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "created_at": {
+                  "example": "any"
+                },
+                "done_at": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "tasks",
+            "shema": [
+              {
+                "$ref": "#/definitions/Task"
+              }
+            ]
+          },
+          "403": {
+            "description": "Error"
+          },
+          "404": {
+            "description": "Error"
+          },
+          "406": {
+            "description": "Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Task"
+        ],
+        "description": "endpoint to delete a tasks",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deleteTask",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Task"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tasks",
+            "shema": [
+              {
+                "$ref": "#/definitions/Task"
+              }
+            ]
+          },
+          "403": {
+            "description": "Error"
+          },
+          "404": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "endpoint to log in",
+        "parameters": [
+          {
+            "name": "logIn",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            },
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "logins",
+            "shema": [
+              {
+                "$ref": "#/definitions/Login"
+              }
+            ]
+          },
+          "401": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/verify": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "description": "endpoint to verify",
+        "parameters": [
+          {
+            "name": "getVerify",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Login"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "logins",
+            "shema": [
+              {
+                "$ref": "#/definitions/Login"
+              }
+            ]
+          },
+          "401": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "delete": {
+        "tags": [
+          "Login"
+        ],
+        "description": "endpoint to log out",
+        "parameters": [
+          {
+            "name": "logOut",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "shema": {
+              "$ref": "#/definitions/Login"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "tasks",
+            "shema": [
+              {
+                "$ref": "#/definitions/Task"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "userId": {
+          "type": "number",
+          "example": 1
+        },
+        "title": {
+          "type": "string",
+          "example": "vacuuming"
+        },
+        "created_at": {
+          "type": "string",
+          "example": "15.06.2023"
+        },
+        "done_at": {
+          "type": "string",
+          "example": "16.06.2023"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "example": "evan@kbw.ch"
+        },
+        "password": {
+          "type": "string",
+          "example": "m295"
+        }
+      }
+    }
+  }
+}

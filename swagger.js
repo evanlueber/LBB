@@ -1,6 +1,6 @@
 const swagger = require("swagger-autogen")();
 const outputFile = "./swagger_output.json";
-const endpointFile = ["./openAPI.js"];
+const endpointFile = ["./tasklibrary.js"];
 const doc = {
   info: {
     version: "1.0.0",
