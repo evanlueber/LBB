@@ -1,0 +1,728 @@
+{
+	"info": {
+		"_postman_id": "5ac17536-f501-4ffb-a381-88e46819b4b2",
+		"name": "library_tests_m295",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27845947"
+	},
+	"item": [
+		{
+			"name": "get books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql([\r",
+							"        {\r",
+							"            isbn: \"978-3-86680-192-9\",\r",
+							"            title: \"Der Alchimist\",\r",
+							"            year: 1988,\r",
+							"            author: \"Paulo Coelho\",\r",
+							"        },\r",
+							"        {\r",
+							"            isbn: \"978-3-446-25645-8\",\r",
+							"            title: \"Harry Potter und der Stein der Weisen\",\r",
+							"            year: 1997,\r",
+							"            author: \"J.K. Rowling\",\r",
+							"        },\r",
+							"        {\r",
+							"            isbn: \"978-3-423-26140-1\",\r",
+							"            title: \"1984\",\r",
+							"            year: 1949,\r",
+							"            author: \"George Orwell\",\r",
+							"        },\r",
+							"        {\r",
+							"            isbn: \"978-3-16-148410-0\",\r",
+							"            title: \"Die Verwandlung\",\r",
+							"            year: 1915,\r",
+							"            author: \"Franz Kafka\",\r",
+							"        },\r",
+							"        {\r",
+							"            isbn: \"978-3-462-00024-7\",\r",
+							"            title: \"Der kleine Prinz\",\r",
+							"            year: 1943,\r",
+							"            author: \"Antoine de Saint-Exupéry\",\r",
+							"        }]\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get book by isbn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"        {\r",
+							"            isbn: \"978-3-86680-192-9\",\r",
+							"            title: \"Der Alchimist\",\r",
+							"            year: 1988,\r",
+							"            author: \"Paulo Coelho\",\r",
+							"        }\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/books/978-3-86680-192-9",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"978-3-86680-192-9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.test(\"Your test name\", function () {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.eql(\r",
+							"            {\r",
+							"                \"isbn\": \"977-3-11-148230-0\",\r",
+							"                \"title\": \"Ael die Ente\",\r",
+							"                \"year\": 1960,\r",
+							"                \"author\": \"Yannick Schlaepfer\"\r",
+							"            }\r",
+							"        );\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"977-3-11-148230-0\",\r\n    \"title\": \"Ael die Ente\",\r\n    \"year\": 1960,\r\n    \"author\": \"Yannick Schlaepfer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book cant be created without title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"977-3-11-148230-0\",\r\n    \"title\": \"\",\r\n    \"year\": 1960,\r\n    \"author\": \"Yannick Schlaepfer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update an existing book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"        {\r",
+							"    isbn: \"977-3-11-148230-0\",\r",
+							"    title: \"Ael das Superhirn\",\r",
+							"    year: 2023,\r",
+							"    author: \"Yannick Schlaepfer\"\r",
+							"}\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Ael das Superhirn\",\r\n    \"year\": 2023,\r\n    \"author\": \"Yannick Schlaepfer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/books/977-3-11-148230-0",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"977-3-11-148230-0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"        [\r",
+							"            {\r",
+							"                \"isbn\": \"978-3-86680-192-9\",\r",
+							"                \"title\": \"Der Alchimist\",\r",
+							"                \"year\": 1988,\r",
+							"                \"author\": \"Paulo Coelho\"\r",
+							"            },\r",
+							"            {\r",
+							"                \"isbn\": \"978-3-446-25645-8\",\r",
+							"                \"title\": \"Harry Potter und der Stein der Weisen\",\r",
+							"                \"year\": 1997,\r",
+							"                \"author\": \"J.K. Rowling\"\r",
+							"            },\r",
+							"            {\r",
+							"                \"isbn\": \"978-3-423-26140-1\",\r",
+							"                \"title\": \"1984\",\r",
+							"                \"year\": 1949,\r",
+							"                \"author\": \"George Orwell\"\r",
+							"            },\r",
+							"            {\r",
+							"                \"isbn\": \"978-3-16-148410-0\",\r",
+							"                \"title\": \"Die Verwandlung\",\r",
+							"                \"year\": 1915,\r",
+							"                \"author\": \"Franz Kafka\"\r",
+							"            },\r",
+							"            {\r",
+							"                \"isbn\": \"978-3-462-00024-7\",\r",
+							"                \"title\": \"Der kleine Prinz\",\r",
+							"                \"year\": 1943,\r",
+							"                \"author\": \"Antoine de Saint-Exupéry\"\r",
+							"            }\r",
+							"        ]\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/books/977-3-11-148230-0",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"977-3-11-148230-0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "desk@library.example",
+							"type": "text"
+						},
+						{
+							"key": "pwd",
+							"value": "m295",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get lends",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"        [\r",
+							"            {\r",
+							"                id: 1,\r",
+							"                customer_id: \"C1\",\r",
+							"                isbn: \"978-3-86680-192-9\",\r",
+							"                borrowed_at: \"2023-06-01\",\r",
+							"                returned_at: \"2023-06-10\",\r",
+							"            },\r",
+							"            {\r",
+							"                id: 2,\r",
+							"                customer_id: \"C2\",\r",
+							"                isbn: \"978-3-446-25645-8\",\r",
+							"                borrowed_at: \"2023-06-02\",\r",
+							"                returned_at: \"2023-06-08\",\r",
+							"            }\r",
+							"        ]\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/lends",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get lends by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"        {\r",
+							"            id: 1,\r",
+							"            customer_id: \"C1\",\r",
+							"            isbn: \"978-3-86680-192-9\",\r",
+							"            borrowed_at: \"2023-06-01\",\r",
+							"            returned_at: \"2023-06-10\",\r",
+							"        },\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/lends/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lends",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new lend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(3)\r",
+							"    pm.expect(jsonData.customer_id).to.eql(\"C3\")\r",
+							"    pm.expect(jsonData.isbn).to.eql(\"978-3-462-00024-7\")\r",
+							"    pm.expect(jsonData.returned_at).to.eql(\"\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_id\": \"C3\",\r\n    \"isbn\": \"978-3-462-00024-7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/lends",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no book lend duplicate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"id\": 4,\r\n    \"customer_id\": \"C1\",\r\n    \"isbn\": \"978-3-462-00024-7\",\r\n    \"borrowed_at\": \"2023-06-01\",\r\n    \"returned_at\": \"2023-06-10\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/lends",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a lend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"{\r",
+							"    id: 1,\r",
+							"    customer_id: \"C1\",\r",
+							"    isbn: \"978-3-86680-192-9\",\r",
+							"    borrowed_at: \"2023-06-01\",\r",
+							"    returned_at: \"1.01.2040\",\r",
+							"  }\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_id\": \"C1\",\r\n    \"isbn\": \"978-3-86680-192-9\",\r\n    \"returned_at\": \"1.01.2040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/lends/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lends",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book does not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"customer_id\": \"C4\",\r\n    \"isbn\": \"908-3-462-0024-9\",\r\n    \"borrowed_at\": \"2023-06-01\",\r\n    \"returned_at\": \"2023-06-10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/lends",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"    pm.expect(jsonData).to.eql(\r",
+							"        \"desk@library.example\"\r",
+							"    );\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/verify",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
